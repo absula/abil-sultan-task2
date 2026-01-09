@@ -3,8 +3,7 @@ package com.example.abil_sultan_task2.product.repository;
 import com.example.abil_sultan_task2.product.domain.Product;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class ProductRepository {
@@ -23,12 +22,16 @@ public class ProductRepository {
         return database.get(id);
     }
 
-    public void deleteById(Long id) {
-        database.remove(id);
+    public List<Product> findAll() {
+        return new ArrayList<>(database.values());
     }
 
     public Product update(Long id, Product product) {
         database.put(id, product);
         return product;
+    }
+
+    public void deleteById(Long id) {
+        database.remove(id);
     }
 }

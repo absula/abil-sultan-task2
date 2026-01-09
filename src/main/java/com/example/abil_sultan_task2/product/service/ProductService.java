@@ -7,6 +7,9 @@ import com.example.abil_sultan_task2.product.repository.ProductRepository;
 import com.example.abil_sultan_task2.product.support.ProductMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductService {
 
@@ -20,8 +23,8 @@ public class ProductService {
 
     public ProductResponse create(ProductRequest request) {
         Product product = mapper.toProduct(request);
-        Product savedProduct = repository.save(product);
-        return mapper.toResponse(savedProduct);
+        Product saved = repository.save(product);
+        return mapper.toResponse(saved);
     }
 
     public ProductResponse getById(Long id) {
@@ -29,8 +32,11 @@ public class ProductService {
         return mapper.toResponse(product);
     }
 
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public List<ProductResponse> getAll() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public ProductResponse update(Long id, ProductRequest request) {
@@ -38,5 +44,9 @@ public class ProductService {
         product.setId(id);
         Product updated = repository.update(id, product);
         return mapper.toResponse(updated);
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }
