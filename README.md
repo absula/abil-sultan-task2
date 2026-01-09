@@ -21,17 +21,15 @@ This structure makes the application easier to understand and modify.
 Available endpoints
 The following endpoints are implemented:
 
-POST /api/v1/products
-Creates a new product.
+POST /api/v1/products Creates a new product.
 
-GET /api/v1/products/{id}
-Returns a product with the given id.
+GET /api/v1/products Returns all products.
 
-PUT /api/v1/products/{id}
-Updates an existing product.
+GET /api/v1/products/{id} Returns a product with the given id.
 
-DELETE /api/v1/products/{id}
-Deletes a product.
+PUT /api/v1/products/{id} Updates an existing product.
+
+DELETE /api/v1/products/{id} Deletes a product.
 
 Data storage
 For simplicity, the application uses in-memory storage based on a HashMap.
